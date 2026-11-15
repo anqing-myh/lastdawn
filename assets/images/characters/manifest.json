@@ -1,0 +1,186 @@
+﻿{
+    "heinrich":  [
+                     {
+                         "source":  "海因里希.png"
+                     }
+                 ],
+    "laplace":  [
+                    {
+                        "source":  "拉普拉斯.png"
+                    }
+                ],
+    "sacred_kirin":  [
+                         {
+                             "source":  "圣灵麒麟.png"
+                         }
+                     ],
+    "flashwing":  [
+                      {
+                          "source":  "闪翼鸟.png"
+                      }
+                  ],
+    "cairn":  [
+                  {
+                      "source":  "垒磊石.png"
+                  }
+              ],
+    "xuanwu":  [
+                   {
+                       "source":  "玄武.png"
+                   }
+               ],
+    "fire_wyvern":  [
+                        {
+                            "source":  "火神翼龙修改图.png"
+                        }
+                    ],
+    "wood_spirit":  [
+                        {
+                            "source":  "木灵兽.png"
+                        }
+                    ],
+    "summoner":  [
+                     {
+                         "source":  "召灵师.png"
+                     }
+                 ],
+    "thunder_dragon":  [
+                           {
+                               "source":  "蓝电霸王龙.png"
+                           }
+                       ],
+    "griffin":  [
+                    {
+                        "source":  "幻狮鹫.png"
+                    }
+                ],
+    "terminus_rabbit":  [
+                            {
+                                "source":  "终结兔.png"
+                            }
+                        ],
+    "soul_luoxi":  [
+                       {
+                           "source":  "灵魂洛羲.png"
+                       }
+                   ],
+    "vermilion":  [
+                      {
+                          "source":  "朱雀.png"
+                      }
+                  ],
+    "venom_scorpion":  [
+                           {
+                               "source":  "荼罗毒蝎.png"
+                           }
+                       ],
+    "treant":  [
+                   {
+                       "source":  "朽木妖.png"
+                   }
+               ],
+    "shark_king":  [
+                       {
+                           "source":  "深海鲸鲨王.png"
+                       }
+                   ],
+    "titan":  [
+                  {
+                      "source":  "泰坦.png"
+                  }
+              ],
+    "wuchang":  [
+                    {
+                        "source":  "黑白无常-白魂.png",
+                        "name":  "白魂"
+                    },
+                    {
+                        "source":  "黑白无常-黑魂.png",
+                        "name":  "黑魂"
+                    }
+                ],
+    "leviathan":  [
+                      {
+                          "source":  "利维坦.png"
+                      }
+                  ],
+    "red_butterfly":  [
+                          {
+                              "source":  "红蝶-平静相.png",
+                              "name":  "平静相"
+                          },
+                          {
+                              "source":  "红蝶-般若相.png",
+                              "name":  "般若相"
+                          },
+                          {
+                              "source":  "红蝶-神圣相.png",
+                              "name":  "神圣相"
+                          }
+                      ],
+    "silver_dragon":  [
+                          {
+                              "source":  "银龙王.png"
+                          }
+                      ],
+    "sea_dragon":  [
+                       {
+                           "source":  "海龙神.png"
+                       }
+                   ],
+    "slime":  [
+                  {
+                      "source":  "大史莱姆.png"
+                  }
+              ],
+    "thunder_core":  [
+                         {
+                             "source":  "雷鸣核心.png"
+                         }
+                     ],
+    "lava_troll":  [
+                       {
+                           "source":  "熔岩巨魔.png"
+                       }
+                   ],
+    "alba":  [
+                 {
+                     "source":  "雅柏菲卡废弃稿.png"
+                 }
+             ],
+    "black_dragon":  [
+                         {
+                             "source":  "黑龙王.png"
+                         }
+                     ],
+    "white_tiger":  [
+                        {
+                            "source":  "白虎.png"
+                        }
+                    ],
+    "ice_core":  [
+                     {
+                         "source":  "冰原核心.png"
+                     }
+                 ],
+    "hell_core":  [
+                      {
+                          "source":  "地狱核心.png"
+                      }
+                  ],
+    "sword_dance":  [
+                        {
+                            "source":  "剑舞.png"
+                        }
+                    ],
+    "calamity_core":  [
+                          {
+                              "source":  "灾劫核心.png"
+                          }
+                      ],
+    "death_reaper":  [
+                         {
+                             "source":  "死神.png"
+                         }
+                     ]
+}

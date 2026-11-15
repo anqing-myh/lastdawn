@@ -1,0 +1,14 @@
+.unit-stat-section {margin-top:8px}
+.unit-stat-label {font-size:9px;color:var(--muted);margin:5px 0 3px}
+.unit-stat-section .unit-stats {display:flex;flex-wrap:wrap;gap:3px 10px;margin:0;font-size:10px;color:#c5cfc8}
+.unit-stages {display:flex;flex-wrap:wrap;gap:4px;font-size:10px}
+.unit-stages span {border:1px solid #34423d;border-radius:3px;padding:1px 5px;white-space:nowrap}
+.unit-stages b {font-weight:650}
+.unit-stages .positive {color:#a3d9b8;border-color:#58896b;background:#58896b18}
+.unit-stages .negative {color:#edaaa3;border-color:#9f655e;background:#9f655e18}
+.unit-stages .neutral {color:#89988e}
+.unit-action-editor .declaration-lock {margin-top:12px;white-space:normal;width:100%}
+.declaration-panel {margin:0 0 18px;padding:14px 16px;border:1px solid #776744;border-radius:6px;background:#d4b9790b;font-size:12px}
+.declaration-panel h3 {font-size:14px;color:var(--gold);margin-bottom:5px}
+.declaration-panel p+p {margin-top:4px}
+.declaration-panel strong {color:#ecdbb0}

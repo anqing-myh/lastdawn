@@ -1,0 +1,24 @@
+# Local dependencies, builds and caches
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.local-secrets/
+.ssh/
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+# Development-only material
+artifacts/
+tests/
+test-results/
+playwright-report/
+handoff/
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,12 @@
+img.portrait {
+ object-fit: cover;
+ object-position: center;
+ background: #101a20;
+}
+.unit-portrait img.portrait {
+ position: absolute;
+ inset: 0;
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+}

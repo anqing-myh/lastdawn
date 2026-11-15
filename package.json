@@ -1,0 +1,28 @@
+{
+  "name": "last-dawn",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc --noEmit && vite build",
+    "start": "node scripts/dev.mjs --production",
+    "check": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "ws": "8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.2",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.9.3",
+    "vite": "7.1.12"
+  }
+}

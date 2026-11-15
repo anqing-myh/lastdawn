@@ -1,0 +1,25 @@
+/* Archive presentation: skill and battle element labels keep their sizes. */
+.detail-info { min-width: 0; }
+.detail-heading { display: flex; align-items: center; gap: 22px; }
+.detail-identity { flex: 0 0 auto; max-width: 100%; }
+.detail-background {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: #a7b6a5;
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.character-grid .character-info .element,
+.modal .card-detail .detail-identity .element { font-size: 12px; line-height: 21px; }
+.draft-preview .detail-heading { flex-wrap: wrap; gap: 12px; }
+.draft-preview .detail-background { flex-basis: 100%; font-size: 12px; }
+@media (max-width: 700px) {
+  .card-detail .detail-top { align-items: start; }
+  .card-detail .detail-info,
+  .card-detail .detail-heading { display: contents; }
+  .card-detail .detail-identity { align-self: center; }
+  .card-detail .detail-background,
+  .card-detail .stats-grid { grid-column: 1 / -1; margin: 0; }
+}

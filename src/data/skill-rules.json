@@ -1,0 +1,1043 @@
+{
+  "runtime": {
+    "maxReactionDepth": 12,
+    "maxEvents": 1200,
+    "maxExtraActions": 12,
+    "tieBreak": "seeded",
+    "stageMin": -6,
+    "stageMax": 6,
+    "chargeMultiplier": 1.5,
+    "chargeChainTurns": 3,
+    "shieldOverflow": "nullified",
+    "startingRound": 1,
+    "surrenderGraceSeconds": 90,
+    "effectPolicy": "explicit",
+    "probabilityBounds": [
+      0,
+      1
+    ],
+    "tacklePower": 60,
+    "damageMinimum": 1,
+    "flashwing_max_hits": 100,
+    "round_history_limit": 100,
+    "maxBattleRounds": 300,
+    "talentLifeOrbCost": 0.1,
+    "talentLifeOrbMultiplier": 1.4,
+    "talentFairyHeal": 0.08,
+    "talentPrimalThreshold": 80,
+    "talentElementAbsorbPoints": 30,
+    "talentCritIncrement": 0.2,
+    "talentScytheRatio": 0.28,
+    "talentBlessingResistance": 120,
+    "talentEternalDefense": 2,
+    "talentEternalCrit": -2
+  },
+  "rules": {
+    "heinrich_1": {
+      "mechanic": "dragon_oath",
+      "value": 60
+    },
+    "heinrich_2": {
+      "target": "self",
+      "status": "water_spirit",
+      "duration": 3,
+      "cap": 1.8,
+      "min": 1.2
+    },
+    "heinrich_3": {
+      "target": "self",
+      "status": "silent_water",
+      "duration": 3,
+      "stages": 1
+    },
+    "heinrich_4": {
+      "powerPerStage": 20,
+      "lifesteal": 0.5
+    },
+    "heinrich_5": {
+      "removeShield": true,
+      "reduceMaxByDamage": true
+    },
+    "heinrich_6": {
+      "hitsDefenseDivisor": 70,
+      "hitsBase": 2
+    },
+    "laplace_1": {
+      "mechanic": "swap_ally_targets",
+      "target": "self",
+      "debuffDefense": 80
+    },
+    "laplace_2": {
+      "mechanic": "trick_room",
+      "target": "self",
+      "duration": 3
+    },
+    "laplace_3": {
+      "target": "ally_or_self",
+      "shield": {
+        "type": "physical",
+        "base": 100,
+        "atkRatio": 0.1
+      },
+      "flat": {
+        "sp_dfs": 80
+      },
+      "linked": true
+    },
+    "laplace_4": {
+      "mechanic": "replace_skill",
+      "duration": 1
+    },
+    "laplace_5": {
+      "cleanseEnemyBuffs": true,
+      "flatEnemy": {
+        "dfs": -80
+      }
+    },
+    "laplace_6": {
+      "enemyStatus": "wet",
+      "duration": 3,
+      "water": 1.5,
+      "grass": 1.5,
+      "thunder": 1.5,
+      "fire": 0.7,
+      "battle": 0.7
+    },
+    "sacred_kirin_1": {
+      "critBonus": 0.1,
+      "critStage": 1
+    },
+    "sacred_kirin_2": {
+      "target": "self",
+      "status": "holy_blessing",
+      "value": 180,
+      "triggerStage": { "sp_atk": 1, "spd": 1 }
+    },
+    "sacred_kirin_3": {
+      "stageEnemy": {
+        "sp_dfs": -1
+      },
+      "flatEnemy": {
+        "spd": -120
+      }
+    },
+    "sacred_kirin_4": {
+      "critMultiplier": 4
+    },
+    "sacred_kirin_5": {
+      "doubleBaseCrit": true,
+      "penetration": 100,
+      "critPenetration": 100
+    },
+    "sacred_kirin_6": {
+      "requiresNoDamage": true,
+      "refundOnFail": true
+    },
+    "flashwing_1": {
+      "target": "self",
+      "stage": {
+        "spd": 2
+      },
+      "status": "evasion",
+      "duration": 1,
+      "defenseLossPower": 0.8
+    },
+    "flashwing_2": {
+      "mechanic": "invert_stages",
+      "target": "any"
+    },
+    "flashwing_3": {
+      "mechanic": "next_aoe",
+      "target": "self",
+      "normal": 1,
+      "charged": 3
+    },
+    "flashwing_4": {
+      "interruptIfUnacted": true
+    },
+    "flashwing_5": {
+      "hits": 2,
+      "repeatOnCrit": true
+    },
+    "flashwing_6": {
+      "mechanic": "delayed_attack",
+      "reduction": 0.7,
+      "delay": 1
+    },
+    "cairn_1": {
+      "target": "all_enemies",
+      "enemyStatus": "illusion",
+      "duration": 3,
+      "miss": 0.5
+    },
+    "cairn_2": {
+      "target": "self",
+      "mechanic": "blood_shield",
+      "ratio": 0.15,
+      "breakStage": true
+    },
+    "cairn_3": {
+      "target": "self",
+      "stage": {
+        "sp_dfs": -2,
+        "dfs": 2,
+        "atk": 2,
+        "spd": 2
+      }
+    },
+    "cairn_4": {
+      "stageSelfAfter": {
+        "sp_dfs": -1,
+        "atk": 1,
+        "spd": 1
+      },
+      "damageToAtk": 0.5
+    },
+    "cairn_5": {
+      "mechanic": "soul_burn",
+      "stageCost": 1
+    },
+    "cairn_6": {
+      "alsoSelf": true
+    },
+    "xuanwu_1": {
+      "mechanic": "sacrifice",
+      "multiplier": 2,
+      "allyDamage": 1
+    },
+    "xuanwu_2": {
+      "mechanic": "stage_allocation",
+      "target": "any",
+      "stages": 3
+    },
+    "xuanwu_3": {
+      "target": "any",
+      "elements": [
+        "水",
+        "土"
+      ],
+      "duration": 2
+    },
+    "xuanwu_4": {
+      "enemyStatus": "slow",
+      "value": 0.4,
+      "duration": 3
+    },
+    "xuanwu_5": {
+      "stageEnemy": {
+        "atk": -1,
+        "dfs": -1,
+        "sp_dfs": -1
+      }
+    },
+    "xuanwu_6": {
+      "mechanic": "counter_team",
+      "duration": 2,
+      "power": 60,
+      "increment": 20,
+      "elements": [
+        "战斗"
+      ]
+    },
+    "fire_wyvern_1": {
+      "mechanic": "dragon_crossing",
+      "target": "self",
+      "shield": {
+        "type": "physical",
+        "base": 1,
+        "layers": 2
+      }
+    },
+    "fire_wyvern_2": {
+      "target": "self",
+      "hpCost": 0.35,
+      "stage": {
+        "atk": 3,
+        "spd": 3
+      }
+    },
+    "fire_wyvern_3": {
+      "target": "self",
+      "stage": {
+        "spd": 2
+      },
+      "status": "dragon_dance",
+      "duration": 3
+    },
+    "fire_wyvern_4": {
+      "hits": 3,
+      "speedThreshold": 500,
+      "speedStep": 100,
+      "powerStep": 5
+    },
+    "fire_wyvern_5": {
+      "powerPerStage": 30,
+      "resetStages": true
+    },
+    "fire_wyvern_6": {
+      "hpSet": 1,
+      "globalOnce": true
+    },
+    "wood_spirit_1": {
+      "target": "all_allies",
+      "status": "forest_domain",
+      "duration": 3,
+      "value": 180
+    },
+    "wood_spirit_2": {
+      "enemyStatus": "madness",
+      "duration": 3
+    },
+    "wood_spirit_3": {
+      "target": "self",
+      "healMax": 0.4,
+      "flatAfter": {
+        "hp": -180
+      }
+    },
+    "wood_spirit_4": {
+      "fixedMissingSelf": 0.2
+    },
+    "wood_spirit_5": {
+      "damageToMax": 0.45
+    },
+    "wood_spirit_6": {
+      "fearChance": 0.5,
+      "failureDamageBonus": 0.8,
+      "duration": 1
+    },
+    "summoner_1": {
+      "mechanic": "summon_element",
+      "sameTypeBonus": 0.35
+    },
+    "summoner_2": {
+      "mechanic": "soul_revival",
+      "extra": 2
+    },
+    "summoner_3": {
+      "mechanic": "prophecy",
+      "selfDefense": 180,
+      "target": "single"
+    },
+    "summoner_4": {
+      "chooseElement": true
+    },
+    "summoner_5": {
+      "extraEnemyPpCost": 2
+    },
+    "summoner_6": {
+      "enemyStatus": "power_down",
+      "value": 40,
+      "duration": 2
+    },
+    "thunder_dragon_1": {
+      "mechanic": "thunder_trace",
+      "selfMaxCost": 0.0625,
+      "counter": 1
+    },
+    "thunder_dragon_2": {
+      "target": "self",
+      "stage": {
+        "atk": 1,
+        "sp_atk": 1,
+        "spd": 1
+      },
+      "counter": {
+        "name": "雷痕",
+        "delta": 1
+      }
+    },
+    "thunder_dragon_3": {
+      "target": "single",
+      "counterCost": {
+        "name": "雷痕",
+        "value": 1
+      },
+      "selfReduction": 0.4,
+      "enemyStatus": "heartache",
+      "value": 0.125,
+      "duration": 3
+    },
+    "thunder_dragon_4": {
+      "counter": {
+        "name": "雷痕",
+        "delta": 1
+      },
+      "chance": 0.33,
+      "chanceMultiplier": 3,
+      "chanceCounter": 2
+    },
+    "thunder_dragon_5": {
+      "channel": "mixed",
+      "counterCost": {
+        "name": "雷痕",
+        "value": 2
+      },
+      "stageEnemy": {
+        "dfs": -1,
+        "sp_dfs": -1
+      },
+      "paralyzeChance": 0.5
+    },
+    "thunder_dragon_6": {
+      "channel": "mixed",
+      "target": "all_enemies",
+      "hitsCounter": "雷痕",
+      "hitsBase": 2,
+      "clearCounter": "雷痕"
+    },
+    "griffin_1": {
+      "target": "self",
+      "flatFromSpeed": 0.1,
+      "status": "rising_air",
+      "duration": 1
+    },
+    "griffin_2": {
+      "target": "self",
+      "flat": {
+        "atk": 160,
+        "dfs": 160
+      },
+      "status": "low_pressure",
+      "duration": 3,
+      "flatDuration": 3
+    },
+    "griffin_3": {
+      "target": "self",
+      "shield": {
+        "type": "physical",
+        "selfAtkRatio": 0.2
+      },
+      "stage": {
+        "atk": 1,
+        "spd": 1,
+        "crit": 1
+      },
+      "linked": true
+    },
+    "griffin_4": {
+      "fixedDifference": 0.7
+    },
+    "griffin_5": {
+      "bypass": true,
+      "lock": true,
+      "critStealThreshold": 200
+    },
+    "griffin_6": {
+      "mechanic": "critical_wind",
+      "perStage": 0.08,
+      "duration": 2
+    },
+    "terminus_rabbit_1": {
+      "lifesteal": 0.3
+    },
+    "terminus_rabbit_2": {
+      "target": "self",
+      "mechanic": "steal_field_stages",
+      "attributes": [
+        "atk",
+        "spd"
+      ]
+    },
+    "terminus_rabbit_3": {
+      "enemyStatus": "recoil",
+      "value": 0.3,
+      "duration": 3
+    },
+    "terminus_rabbit_4": {
+      "fixedTargetMax": 0.1
+    },
+    "terminus_rabbit_5": {
+      "enemyStatus": "encore",
+      "duration": 2
+    },
+    "terminus_rabbit_6": {
+      "firstStage": {
+        "atk": 2
+      }
+    },
+    "soul_luoxi_1": {
+      "mechanic": "execute_threshold",
+      "perRound": 45
+    },
+    "soul_luoxi_2": {
+      "target": "single",
+      "mechanic": "flower_sequence",
+      "duration": 3,
+      "value": 40
+    },
+    "soul_luoxi_3": {
+      "target": "self",
+      "status": "divine_descent",
+      "value": 0.5,
+      "duration": 2
+    },
+    "soul_luoxi_4": {
+      "usagePower": 20,
+      "stageEnemy": {
+        "atk": -1,
+        "dfs": -1,
+        "sp_atk": -1,
+        "sp_dfs": -1
+      }
+    },
+    "soul_luoxi_5": {
+      "enemyStatus": "next_power_down",
+      "value": 40,
+      "stageEnemy": {
+        "sp_dfs": -1
+      }
+    },
+    "soul_luoxi_6": {
+      "powerPerDebuff": 20
+    },
+    "vermilion_1": {
+      "mechanic": "growing_flame",
+      "perRound": 0.08
+    },
+    "vermilion_2": {
+      "mechanic": "phoenix",
+      "chance": 0.4,
+      "heal": 0.3
+    },
+    "vermilion_3": {
+      "target": "any",
+      "mechanic": "repeat_stages",
+      "reduction": 0.4
+    },
+    "vermilion_4": {
+      "mechanic": "next_damage_block"
+    },
+    "vermilion_5": {
+      "mechanic": "phoenix_fire",
+      "lifesteal": 1,
+      "stage": 2
+    },
+    "vermilion_6": {
+      "target": "all_enemies",
+      "powerTargetDfs": 0.25
+    },
+    "venom_scorpion_1": {
+      "physicalReduction": 80,
+      "maxRatio": 0.5
+    },
+    "venom_scorpion_2": {
+      "enemyStatus": "poison",
+      "duration": 3,
+      "normal": 30,
+      "attacking": 90
+    },
+    "venom_scorpion_3": {
+      "target": "self",
+      "status": "dormant",
+      "value": 2.5,
+      "reduction": 0.6
+    },
+    "venom_scorpion_4": {
+      "isAttack": false,
+      "flatEnemy": {
+        "dfs": -60,
+        "sp_dfs": -60
+      },
+      "poisonMultiplier": 1.7
+    },
+    "venom_scorpion_5": {
+      "critBonus": 0.2
+    },
+    "venom_scorpion_6": {
+      "defenseBasis": "sp_dfs",
+      "bypass": true,
+      "lock": true
+    },
+    "treant_1": {
+      "mechanic": "element_redirect",
+      "elements": [
+        "水",
+        "土",
+        "雷"
+      ],
+      "stage": {
+        "sp_atk": 1,
+        "dfs": 1,
+        "sp_dfs": 1
+      }
+    },
+    "treant_2": {
+      "target": "self",
+      "status": "reflect",
+      "duration": 1,
+      "noConsecutive": true
+    },
+    "treant_3": {
+      "target": "self",
+      "mechanic": "restore_history",
+      "rounds": 2
+    },
+    "treant_4": {
+      "enemyPpAll": -1
+    },
+    "treant_5": {
+      "defenseBasis": "dfs"
+    },
+    "treant_6": {
+      "target": "all_except_self",
+      "allyHeal": true
+    },
+    "shark_king_1": {
+      "mechanic": "first_charge_gate"
+    },
+    "shark_king_2": {
+      "mechanic": "reset_speed_damage",
+      "perSpeed": 0.004
+    },
+    "shark_king_3": {
+      "target": "self",
+      "stage": {
+        "atk": 1
+      },
+      "flat": {
+        "spd": 200
+      },
+      "status": "lifesteal",
+      "value": 0.6,
+      "duration": 2
+    },
+    "shark_king_4": {
+      "mechanic": "reset_gate"
+    },
+    "shark_king_5": {
+      "target": "single",
+      "status": "shark_blade",
+      "duration": 3,
+      "value": 50
+    },
+    "shark_king_6": {
+      "critRolls": 3
+    },
+    "titan_1": {
+      "mechanic": "power_awaken",
+      "threshold": 120,
+      "limit": 3,
+      "stage": {
+        "dfs": -1,
+        "sp_dfs": -1
+      }
+    },
+    "titan_2": {
+      "target": "any",
+      "mechanic": "swap_elements",
+      "stage": 2
+    },
+    "titan_3": {
+      "mechanic": "attack_fixed",
+      "costStage": 1,
+      "ratio": 0.3
+    },
+    "titan_4": {
+      "stageEnemy": {
+        "dfs": -1
+      },
+      "enemyStatus": "defer_next",
+      "duration": 2
+    },
+    "titan_5": {
+      "enemyStatus": "taunt",
+      "duration": 2
+    },
+    "titan_6": {
+      "selfDamage": 0.25,
+      "enemyStatus": "fear",
+      "duration": 1
+    },
+    "wuchang_1": {
+      "target": "self",
+      "mechanic": "switch_form",
+      "charged": true,
+      "firstNext": true,
+      "immuneRound": true
+    },
+    "wuchang_2": {
+      "mechanic": "declare_next",
+      "duration": 3,
+      "chance": 0.5
+    },
+    "wuchang_3": {
+      "mechanic": "triple_soul",
+      "rolls": 3,
+      "chance": 0.75,
+      "duration": 1
+    },
+    "wuchang_4": {
+      "mechanic": "wuchang_four"
+    },
+    "wuchang_5": {
+      "mechanic": "wuchang_five",
+      "stageDivisor": 100
+    },
+    "wuchang_6": {
+      "mechanic": "wuchang_end",
+      "perDebuff": 10
+    },
+    "leviathan_1": {
+      "mechanic": "ancient_blood",
+      "cost": 70,
+      "value": 20
+    },
+    "leviathan_2": {
+      "mechanic": "aoe_guard",
+      "threshold": 120,
+      "value": 1
+    },
+    "leviathan_3": {
+      "mechanic": "wind_target_lock"
+    },
+    "leviathan_4": {
+      "target": "any",
+      "status": "tornado_target",
+      "duration": 1
+    },
+    "leviathan_5": {
+      "fastestMultiplier": 2
+    },
+    "leviathan_6": {
+      "firstBelow": 0.5,
+      "fixedTargetSpeed": 0.12
+    },
+    "red_butterfly_1": {
+      "enemyStatus": "butterfly",
+      "duration": 3,
+      "value": 50
+    },
+    "red_butterfly_2": {
+      "mechanic": "butterfly_swap",
+      "duration": 3
+    },
+    "red_butterfly_3": {
+      "target": "self",
+      "mechanic": "copy_field"
+    },
+    "red_butterfly_4": {
+      "mechanic": "invert_highest",
+      "afterForm": 1
+    },
+    "red_butterfly_5": {
+      "stageEnemy": {
+        "dfs": -1,
+        "sp_dfs": -2
+      },
+      "afterForm": 0
+    },
+    "red_butterfly_6": {
+      "mechanic": "butterfly_six",
+      "target": "form"
+    },
+    "silver_dragon_1": {
+      "mechanic": "silver_seal",
+      "debuff": 1,
+      "duration": 3
+    },
+    "silver_dragon_2": {
+      "target": "all_allies",
+      "mechanic": "dragon_domain",
+      "value": 80,
+      "dragonExtra": 40,
+      "duration": 3
+    },
+    "silver_dragon_3": {
+      "target": "all_allies",
+      "flat": {
+        "dfs": 300,
+        "sp_dfs": 300
+      },
+      "cleanse": true,
+      "duration": 1,
+      "flatDuration": 1
+    },
+    "silver_dragon_4": {
+      "target": "self",
+      "mechanic": "random_heal",
+      "min": 1,
+      "max": 500,
+      "low": 150,
+      "high": 350
+    },
+    "silver_dragon_5": {
+      "mechanic": "rainbow"
+    },
+    "silver_dragon_6": {
+      "powerSelfDefenses": 0.1,
+      "target": "all_enemies",
+      "dragonBonus": 0.3
+    },
+    "sea_dragon_1": {
+      "mechanic": "full_health_guard",
+      "value": 1
+    },
+    "sea_dragon_2": {
+      "target": "self",
+      "maxCost": 0.2,
+      "stage": {
+        "sp_atk": 2
+      }
+    },
+    "sea_dragon_3": {
+      "mechanic": "tail_sweep",
+      "ratio": 0.8,
+      "cap": 400
+    },
+    "sea_dragon_4": {
+      "damageToMax": 0.3,
+      "healMaxAfter": 0.2
+    },
+    "sea_dragon_5": {
+      "mechanic": "thunder_judgment"
+    },
+    "sea_dragon_6": {
+      "freezeCondition": true,
+      "enemyStatus": "freeze",
+      "duration": 2
+    },
+    "slime_1": {
+      "mechanic": "dark_source",
+      "threshold": 250,
+      "value": 60
+    },
+    "slime_2": {
+      "target": "self",
+      "healMissing": 0.5,
+      "flat": {
+        "hp": 500,
+        "dfs": -80,
+        "sp_dfs": -80
+      },
+      "stage": {
+        "dfs": -1,
+        "sp_dfs": -1
+      }
+    },
+    "slime_3": {
+      "target": "self",
+      "status": "slime_redirect",
+      "duration": 1,
+      "multiplier": 2.5
+    },
+    "slime_4": {
+      "target": "self",
+      "mechanic": "split",
+      "count": 3,
+      "hpRatio": 0.5,
+      "spellEffect": 0.5,
+      "globalOnce": true
+    },
+    "slime_5": {
+      "enemyStatus": "corrosion",
+      "duration": 3,
+      "hp": 30,
+      "defense": 20
+    },
+    "slime_6": {
+      "fixedTargetRoundDamage": 0.5
+    },
+    "thunder_core_1": {
+      "target": "self",
+      "mechanic": "evil_system",
+      "globalOnce": true
+    },
+    "thunder_core_2": {
+      "target": "self",
+      "shield": {
+        "type": "spell",
+        "base": 200
+      },
+      "stage": {
+        "dfs": 3
+      },
+      "linked": true
+    },
+    "thunder_core_3": {
+      "target": "all_enemies",
+      "mechanic": "emp",
+      "chance": 0.75
+    },
+    "thunder_core_4": {
+      "target": "self",
+      "mechanic": "high_frequency",
+      "duration": 3
+    },
+    "thunder_core_5": {
+      "defenseBasis": "spd",
+      "stunChance": 0.5
+    },
+    "thunder_core_6": {
+      "enemyStatus": "magnetized",
+      "duration": 3,
+      "value": 0.25
+    },
+    "lava_troll_1": {
+      "mechanic": "lava_rage",
+      "chancePerCounter": 0.2,
+      "heal": 800,
+      "incoming": 0.15,
+      "outgoing": 0.35
+    },
+    "lava_troll_2": {
+      "enemyStatus": "fire_next",
+      "duration": 2
+    },
+    "lava_troll_3": {
+      "powerCounter": "燃",
+      "powerPerCounter": 30,
+      "tauntCounter": true,
+      "clearCounter": "燃"
+    },
+    "lava_troll_4": {
+      "powerSelfDfs": 0.25,
+      "target": "all_enemies"
+    },
+    "lava_troll_5": {
+      "target": "self",
+      "status": "hundred_rounding",
+      "duration": 3,
+      "step": 100
+    },
+    "lava_troll_6": {
+      "defenseDamageRatio": -0.2
+    },
+    "alba_1": {
+      "mechanic": "rose_seal",
+      "duration": 2,
+      "everyRounds": 3,
+      "extra": 1
+    },
+    "alba_2": {
+      "chooseChannel": true,
+      "selfDamage": 0.35,
+      "selfStatus": "sacred",
+      "duration": 3,
+      "reduction": 0.35
+    },
+    "alba_3": {
+      "mechanic": "seal_skill",
+      "duration": 2,
+      "globalUnique": true
+    },
+    "alba_4": {
+      "powerMissingSelf": 0.1,
+      "lifesteal": 3
+    },
+    "alba_5": {
+      "target": "self",
+      "mechanic": "missing_all_stats",
+      "ratio": 0.3
+    },
+    "alba_6": {
+      "unlockHp": 300,
+      "penetration": 180,
+      "minDefense": 150,
+      "target": "all_enemies",
+      "channel": "mixed",
+      "extraWorstMissing": 0.15
+    },
+    "black_dragon_1": {
+      "target": "self",
+      "status": "single_immunity",
+      "duration": 3,
+      "stageCost": 1
+    },
+    "black_dragon_2": {
+      "target": "self",
+      "mechanic": "choose_flat",
+      "value": 300
+    },
+    "black_dragon_3": {
+      "requiresPreviousSupport": true,
+      "channel": "mixed",
+      "extraHit": 0.2
+    },
+    "black_dragon_4": {
+      "enemyStatus": "spell_null",
+      "count": 2
+    },
+    "black_dragon_5": {
+      "mechanic": "dark_light",
+      "channel": "mixed",
+      "low": 0.6,
+      "high": 1.6,
+      "threshold": 200,
+      "bonusPower": 60,
+      "notes": "原稿行末 atk 20 与 60 的关系未明，采用已成句的60法伤并保留记录。",
+      "unknownCorrection": "原稿60法伤与atk20未定，暂取成句描述60法伤"
+    },
+    "black_dragon_6": {
+      "target": "self",
+      "status": "space_rift",
+      "duration": 2,
+      "fixedMissingTarget": 0.15
+    },
+    "white_tiger_1": {
+      "mechanic": "moon_guard",
+      "perHit": 0.4
+    },
+    "white_tiger_2": {
+      "target": "self",
+      "hpCost": 0.2,
+      "stage": {
+        "atk": 2,
+        "sp_atk": 2,
+        "dfs": -1,
+        "sp_dfs": -1,
+        "spd": -1,
+        "crit": -1
+      }
+    },
+    "white_tiger_3": {
+      "target": "self",
+      "mechanic": "cost_cleanse",
+      "cost": 40
+    },
+    "white_tiger_4": {
+      "defenseBasis": "minimum"
+    },
+    "white_tiger_5": {
+      "selfStatus": "mixed_conversion",
+      "duration": 3
+    },
+    "white_tiger_6": {
+      "target": "self",
+      "mechanic": "tiger_finale",
+      "hpCost": 0.6,
+      "powerBase": 350,
+      "lifesteal": 0.6
+    },
+    "ice_core_1": { "mechanic": "ice_core_passive" },
+    "ice_core_2": { "target": "self", "mechanic": "ice_core_mode" },
+    "ice_core_3": { "target": "single", "mechanic": "ice_add", "layers": 2, "channel": "physical" },
+    "ice_core_4": { "target": "all_enemies", "mechanic": "ice_age", "channel": "spell" },
+    "ice_core_5": { "mechanic": "ice_rain", "channel": "physical" },
+    "ice_core_6": { "target": "all_enemies", "mechanic": "ice_storm", "extraLayerOnAttack": true },
+    "hell_core_1": { "target": "self", "mechanic": "hell_energy", "duration": 1, "reduction": 0.2, "teamFireBonus": 0.1, "repeatCost": 100 },
+    "hell_core_2": { "stageEnemyIfDamageOver": 100, "stageEnemy": { "dfs": -1, "sp_dfs": -1 } },
+    "hell_core_3": { "target": "all_enemies", "selfStatus": "hell_stun", "duration": 2, "statusStartsNextRound": true },
+    "hell_core_4": { "target": "self", "mechanic": "hell_guidance", "duration": 2 },
+    "hell_core_5": { "mechanic": "hell_ray", "powerRoundMultiplier": 20, "extraFireHit": true, "duration": 3 },
+    "hell_core_6": { "mechanic": "hell_explosion", "bonusMultiplier": 1.4 },
+    "sword_dance_1": { "target": "self", "mechanic": "weapon_choose", "weapons": ["moon_blade", "flying_axe"] },
+    "sword_dance_2": { "target": "self", "mechanic": "weapon_choose", "weapons": ["absorb_shield", "black_shield"] },
+    "sword_dance_3": { "target": "self", "mechanic": "weapon_choose", "weapons": ["eternal_spear", "victory_sword"] },
+    "sword_dance_4": { "target": "self", "mechanic": "weapon_reforge" },
+    "sword_dance_5": { "powerCounter": "weapon_count", "powerPerCounter": 40 },
+    "sword_dance_6": { "target": "ally", "mechanic": "weapon_sacrifice" },
+    "calamity_core_1": { "mechanic": "calamity_passive", "chance": 0.5 },
+    "calamity_core_2": { "mechanic": "calamity_mark", "target": "single", "immuneControl": true },
+    "calamity_core_3": { "mechanic": "calamity_prophecy", "target": "self", "duration": 2, "chance": 0.33, "deathStatRatio": 0.15 },
+    "calamity_core_4": { "mechanic": "calamity_cap", "cap": 100, "duration": 1 },
+    "calamity_core_5": { "target": "all_enemies", "mechanic": "calamity_immunity", "duration": 1 },
+    "calamity_core_6": { "target": "ally_or_self", "mechanic": "calamity_pact" },
+    "death_reaper_1": { "mechanic": "death_reaper_passive", "ghostHp": 100, "cooldown": 2 },
+    "death_reaper_2": { "target": "single", "mechanic": "death_slash" },
+    "death_reaper_3": { "target": "single", "mechanic": "death_gaze", "thresholds": [200, 400, 600], "stages": [1, 2, 3], "ghostThresholds": [0, 300, 600] },
+    "death_reaper_4": { "target": "single", "timing": "first", "mechanic": "death_fake_death", "tries": 4, "chances": [0.2, 0.4, 0.6, 0.8], "ghostEnergy": 100, "duration": 4 },
+    "death_reaper_5": { "target": "single", "timing": "last", "mechanic": "death_despair", "duration": 3, "damagePerEnergy": 0.01, "damageCap": 5, "ghostChargeBreakChance": 0.6 },
+    "death_reaper_6": { "mechanic": "death_scythe", "channel": "spell", "power": 30, "ghostEnergyRatio": 0.1, "ghostLifesteal": 1 }
+  }
+}

@@ -1,0 +1,19 @@
+/* Skill categories use independent border colors; selection keeps its category. */
+.skill-tone-physical{--skill-color:#e17c78;--skill-tint:#e17c7817}
+.skill-tone-spell{--skill-color:#6ba8ed;--skill-tint:#6ba8ed17}
+.skill-tone-mixed{--skill-color:#bc91ec;--skill-tint:#bc91ec17}
+.skill-tone-support{--skill-color:#74bd91;--skill-tint:#74bd9117}
+.skill-tone-passive{--skill-color:#8c969e;--skill-tint:#8c969e10}
+.skill-tone-fixed{--skill-color:#d6b573;--skill-tint:#d6b57317}
+.battle-skill[class*=skill-tone-],.skill-choice[class*=skill-tone-],.detail-skills>article[class*=skill-tone-],.revealed-skills>article[class*=skill-tone-]{border:2px solid var(--skill-color);background:var(--skill-tint);border-radius:5px}
+.detail-skills>article[class*=skill-tone-]{padding:12px}
+.battle-skill.selected[class*=skill-tone-],.skill-choice.selected[class*=skill-tone-]{border-color:var(--skill-color);box-shadow:0 0 0 2px var(--skill-tint),inset 0 0 0 1px var(--skill-color);background:var(--skill-tint)}
+.battle-skill[class*=skill-tone-]:disabled{opacity:.64}
+.battle-skill.skill-tone-passive:disabled{opacity:.78}
+.skill-category{color:var(--skill-color);font-size:9px;line-height:1.4;white-space:normal}
+.battle-skill .skill-category{font-weight:600;color:var(--skill-color)}
+.skill-color-legend{display:flex;flex-wrap:wrap;gap:6px 13px;font-size:10px;color:#a8b6ab;margin:0 0 12px}
+.skill-color-legend>span{display:inline-flex;align-items:center;gap:5px}
+.skill-color-legend i{display:inline-block;width:10px;height:10px;border:2px solid var(--skill-color);border-radius:2px}
+.skill-elements{display:inline-flex;gap:3px;flex-wrap:wrap;align-items:center}
+.battle-skill>.battle-skill-top>.skill-elements .element{font-size:8px;line-height:14px}
