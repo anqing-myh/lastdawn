@@ -1,5 +1,6 @@
 import rawRules from '../data/skill-rules.json';
-import {getElements,typeMultiplier} from './primitives';
+import {attackTypeMultiplier,getElements,typeMultiplier} from './primitives';
+import type {MatchupUnit} from './primitives';
 import type {Action,Channel,DamageRecord,Event,Skill,Unit} from './types';
 
 type Combatant=Pick<Unit,'statuses'|'hp'|'form'|'charged'|'chargeUntil'>&Partial<Pick<Unit,'counters'>>;
@@ -44,14 +45,14 @@ export function attackTargetMode(a:Combatant,s:Skill,round:number,fallback:strin
  if(s.kind==='attack'&&a.statuses.some(st=>st.id==='next_aoe'))mode='all_enemies';
  return mode as string;
 }
-export function attackPreview(a:Combatant,t:Defender,s:Skill,action:Action,round:number){
+export function attackPreview(a:Combatant&Partial<Pick<Unit,'id'|'side'>>,t:Defender&Partial<Pick<Unit,'id'|'side'>>,s:Skill,action:Action,round:number,units:MatchupUnit[]=[]){
  const r=ruleFor(s);
  const hitSkill=s.id==='wuchang_4'||s.id==='wuchang_5'?{...s,channel:(a.form===0?'spell':'physical') as Channel,elements:[a.form===0?'灵':'战斗']}:s;
  let channel:Channel=r.chooseChannel?(action.option==='physical'?'physical':'spell'):r.channel??hitSkill.channel;
  if(r.mechanic==='butterfly_six')channel=a.form===2?'mixed':'physical';
  if([...a.statuses,...t.statuses].some(st=>st.id==='mixed_conversion'))channel='mixed';
  const elements=attackElements(a,hitSkill,round,r.chooseElement?[action.element??'水']:undefined);
- const types=typeMultiplier(elements,getElements(t));
+ const types=a.id!==undefined&&a.side!==undefined&&t.id!==undefined&&t.side!==undefined?attackTypeMultiplier({id:a.id,side:a.side},{...t,id:t.id,side:t.side},elements,units):{...typeMultiplier(elements,getElements(t)),wind:undefined};
  return {elements,channel,applies:channel!=='fixed',...types};
 }
 export const multiplierLabel=(n:number)=>Number(n.toFixed(3)).toString();

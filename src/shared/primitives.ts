@@ -4,13 +4,14 @@ export function clamp(n:number,min:number,max:number){return Math.max(min,Math.m
 export function iceLayers(u:Pick<Unit,'statuses'>){return u.statuses.filter(st=>st.id==='ice_seal').reduce((n,st)=>n+st.value,0);}
 export function stageValue(u:Pick<Unit,'stages'|'stageModifiers'>&Partial<Pick<Unit,'statuses'>>,s:Stage){const iceSlow=s==='spd'?(u.statuses??[]).filter(st=>st.id==='ice_seal'&&!st.data?.ruthless).reduce((n,st)=>n+st.value,0):0;return clamp(u.stages[s]+u.stageModifiers.filter(m=>m.stat===s).reduce((n,m)=>n+m.delta,0)-iceSlow,-6,6);}
 export function pointValue(u:Pick<Unit,'base'|'modifiers'>,s:Stat){return Math.max(s==='hp'?1:0,u.base[s]+u.modifiers.filter(m=>m.stat===s).reduce((value,m)=>value+m.delta,0));}
-export function effective(u:Unit,s:Stat){
+type SpeedUnit=Pick<Unit,'cardId'|'base'|'modifiers'|'stages'|'stageModifiers'|'statuses'|'fragments'|'fragmentMax'|'counters'>;
+export function effective(u:SpeedUnit,s:Stat){
  if(s==='hp'&&u.fragments&&u.fragmentMax)return u.fragments.filter(v=>v>0).length*u.fragmentMax||1;
  let value=u.base[s]+u.modifiers.filter(m=>m.stat===s).reduce((a,m)=>a+m.delta,0);
  if(u.cardId==='sword_dance'&&s!=='hp')value+=Math.max(0,u.counters.weapon_count??0)*30;
  if(s!=='hp')value*=Math.pow(1.2,stageValue(u,s));
- if(s==='spd'&&has(u,'slow'))value*=.6;
- if(s==='spd'&&has(u,'paralysis'))value/=1.2;
+ if(s==='spd'&&u.statuses.some(st=>st.id==='slow'))value*=1-(u.statuses.find(st=>st.id==='slow')!.value||.3);
+ if(s==='spd'&&u.statuses.some(st=>st.id==='paralysis'))value/=1.2;
  return Math.max(s==='hp'?1:0,value);
 }
 export function has(u:Unit,id:string){return u.statuses.some(s=>s.id===id);}
@@ -29,6 +30,19 @@ export function typeMultiplier(attack:string[],defense:string[]){
  const factors=attack.flatMap(a=>defense.map(d=>a==='none'||d==='none'?1:matrix[a][d]));
  const raw=factors.reduce((a,b)=>a*b,1),value=clamp(raw,...config.types.multiplied_result_clamp as [number,number]);
  return {factors,raw,value,clamped:raw!==value};
+}
+export type MatchupUnit=SpeedUnit&Pick<Unit,'id'|'side'|'skills'|'hp'|'dead'>;
+export function attackTypeMultiplier(a:Pick<Unit,'id'|'side'>,t:Pick<Unit,'id'|'side'|'cardId'|'hp'|'elements'|'elementUntil'|'form'>,elements:string[],units:MatchupUnit[]){
+ const normal=typeMultiplier(elements,getElements(t)),attacker=units.find(u=>u.id===a.id),target=units.find(u=>u.id===t.id);
+ if(a.side===t.side||!attacker||!target)return {...normal,wind:undefined as string|undefined};
+ const winds=units.filter(u=>u.cardId==='leviathan'&&u.hp>0&&!u.dead&&u.skills.includes('leviathan_3')&&!u.statuses.some(st=>st.id==='rose_seal')).sort((x,y)=>effective(y,'spd')-effective(x,'spd'));
+ for(const wind of winds){
+  const incoming=wind.side===t.side,slower=incoming?attacker:target;
+  if(effective(slower,'spd')>=effective(wind,'spd'))continue;
+  const value=incoming?.6:1.6;
+  return {factors:[value],raw:value,value,clamped:false,wind:wind.id};
+ }
+ return {...normal,wind:undefined as string|undefined};
 }
 export function critRate(a:Unit,t:Unit,b?:Pick<Battle,'round'|'global'>){const direction=b&&b.global.trick_room_until>=b.round?-1:1;return Math.min(config.crit.max_total_crit_rate,config.crit.base_crit_rate+Math.max(0,(effective(a,'spd')-effective(t,'spd'))*direction)*config.crit.speed_diff_coefficient);}
 export function evasionRate(a:Unit,t:Unit){return clamp(config.evasion.base+(effective(a,'spd')-effective(t,'spd'))*config.evasion.speed_coefficient,0,config.evasion.cap);}

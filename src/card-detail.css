@@ -2,8 +2,11 @@
 .detail-info { min-width: 0; }
 .detail-heading { display: flex; align-items: center; gap: 22px; }
 .detail-identity { flex: 0 0 auto; max-width: 100%; }
+.detail-profile { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.detail-summary { margin: 0; color: #c5cfbf; font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.character-roles { display: inline-block; max-width: 100%; padding-left: 7px; border-left: 1px solid #655a3d; color: #c5b483; font-size: 11px; line-height: 20px; white-space: nowrap; }
+.character-info .elements { gap: 5px; }
 .detail-background {
-  flex: 1;
   min-width: 0;
   margin: 0;
   color: #a7b6a5;
@@ -14,12 +17,13 @@
 .character-grid .character-info .element,
 .modal .card-detail .detail-identity .element { font-size: 12px; line-height: 21px; }
 .draft-preview .detail-heading { flex-wrap: wrap; gap: 12px; }
-.draft-preview .detail-background { flex-basis: 100%; font-size: 12px; }
+.draft-preview .detail-profile { flex-basis: 100%; }
+.draft-preview .detail-background, .draft-preview .detail-summary { font-size: 12px; }
 @media (max-width: 700px) {
   .card-detail .detail-top { align-items: start; }
   .card-detail .detail-info,
   .card-detail .detail-heading { display: contents; }
   .card-detail .detail-identity { align-self: center; }
-  .card-detail .detail-background,
+  .card-detail .detail-profile,
   .card-detail .stats-grid { grid-column: 1 / -1; margin: 0; }
 }

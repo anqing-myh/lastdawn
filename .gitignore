@@ -1,24 +1,61 @@
-# Local dependencies, builds and caches
+# 依赖、构建产物和缓存
 node_modules/
 dist/
 .vite/
 *.tsbuildinfo
-# Local configuration and credentials
+
+# 本地配置、凭据及编辑器文件
 .env
 .env.*
 !.env.example
 .local-secrets/
 .ssh/
+.codex/
+.agents/
+.aws/
+.vscode/
+.idea/
 *.pem
 *.key
 id_ed25519*
 id_rsa*
-# Development-only material
-artifacts/
-tests/
-test-results/
-playwright-report/
-handoff/
 *.log
 .DS_Store
 Thumbs.db
+
+# 测试、报告和旧仓库快照
+/artifacts/
+/tests/
+/test-results/
+/playwright-report/
+/.gitignore.example
+/src/bots/simulator.ts
+/src/bots/report.ts
+/src/bots/timing.ts
+
+# 仅公开游戏启动所需脚本
+/scripts/*
+!/scripts/dev.mjs
+!/scripts/register.mjs
+!/scripts/loader.mjs
+
+# 正式机制、角色及全局配置文档
+/handoff/*
+!/handoff/02-游戏机制与底层逻辑.md
+!/handoff/03-角色设定.md
+!/handoff/04-全局配置表.md
+
+# 排除开发审查记录和草稿
+/docs/*
+!/docs/github-upload.md
+
+# 仅公开网页使用的图片与清单
+/assets/*
+!/assets/images/
+/assets/images/*
+!/assets/images/characters/
+/assets/images/characters/*
+!/assets/images/characters/manifest.json
+!/assets/images/characters/web/
+/assets/images/characters/web/*
+!/assets/images/characters/web/*.webp

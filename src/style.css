@@ -41,3 +41,7 @@
 }
 .unit-panel > .unit-talent { grid-area: talent; }
 .battle-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Human versus computer entry follows the existing lobby visual style. */
+.computer-arena { min-height: 340px; }
+.computer-arena .hero-copy { max-width: 760px; padding-right: 24px; }

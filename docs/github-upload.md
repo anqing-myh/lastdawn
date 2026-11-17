@@ -1,68 +1,56 @@
-# 将精简版本上传到GitHub
+# 在项目根目录维护GitHub仓库
 
-本次准备的公开目录为 `D:\pkm\artifacts\github-public\lastdawn`。它是完整开发目录的独立快照，仅包含运行、构建、网页图片和必要文档。上传它即可，不要把整个 `D:\pkm` 直接拖入公开仓库。
+当前直接使用开发目录 `D:\pkm`，远程仓库为 https://github.com/anqing-myh/lastdawn 。现有提交历史、`main` 分支和 `origin` 已保留，无需重新初始化或重复添加远程地址。
 
-## 一、在GitHub创建空仓库
+## 文件范围
 
-登录GitHub，选择右上角的“+”→“New repository”，仓库名可用 `lastdawn`，可见性选 `Public`。本地版本已有README和.gitignore，首次创建时不勾选初始化README、.gitignore或许可证。许可证尚未代为选择，可由作者后续决定。
+公开游戏源码、运行脚本、依赖清单、构建配置、网页图片和正式文档。根目录 `.gitignore` 排除测试、草稿、原始图片、提示词、日志、依赖目录、构建产物和本地凭据；这些内容仍可保留在本机开发使用。
 
-创建后复制仓库页面显示的HTTPS地址。
+角色设定直接跟踪 `handoff/03-角色设定.md`，机制与全局配置分别位于同目录的02、04号文档。文档无需另行复制。
 
-## 二、从PowerShell提交
+## 检查与提交
+
+日常直接在 `D:\pkm` 修改和测试游戏。只有作者明确要求更新GitHub时，再执行以下步骤：
 
 ```powershell
-Set-Location 'D:\pkm\artifacts\github-public\lastdawn'
-git init -b main
-npm.cmd install
+Set-Location 'D:\pkm'
+git status --short --untracked-files=all
+npm.cmd run check
 npm.cmd run build
 git add .
-git status --short
+git diff --cached --name-only
+git diff --cached --stat
+git diff --cached --check
 ```
 
-检查待提交列表中只有README、.gitignore、package文件、构建配置、src、server、三个运行脚本、WebP素材清单和docs。没有 `.local-secrets`、私钥、`.env`、日志、测试、原始PNG、node_modules或dist。
+检查完整暂存清单，确认没有本地凭据、测试、草稿、原始图片、日志、依赖或构建产物。也可用 `git diff --cached` 查看文本改动。`.gitignore` 不会自动取消已经被跟踪的文件，应以实际暂存清单为准。
 
-首次安装会生成 `package-lock.json`，将它一并提交。完整开发环境的旧锁文件由离线缓存恢复，未直接复制到公开目录；请在可正常访问npm的终端完成这一步。
-
-首次使用Git时，如果提交提示缺少身份，在此仓库内设置：
+确认改动后提交、推送：
 
 ```powershell
-git config user.name '你的GitHub显示名'
-git config user.email 'GitHub设置页面提供的noreply邮箱'
+git commit -m 'Update game content'
+git push origin main
 ```
 
-然后提交并推送，把命令中的仓库地址替换成刚才复制的实际地址：
+`git add` 只暂存内容，`git commit` 记录本地版本，`git push` 才会更新GitHub。暂存后再次修改文件，需要重新暂存相应文件。无需为每次本地调整提交，也无需维护另一份快照。
 
-```powershell
-git commit -m 'Initial public version of Last Dawn'
-git remote add origin '粘贴你的GitHub仓库HTTPS地址'
-git push -u origin main
-```
+## 验证公开版本可运行
 
-首次推送按本机Git凭据管理器的提示登录GitHub。推送完成后，刷新GitHub仓库页面检查README、代码和图片目录。这里仅上传代码，不执行任何服务器部署。
-
-## 三、验证别人能够运行
-
-在另一个空目录克隆仓库后运行：
+可以在另一个空目录克隆仓库后验证：
 
 ```sh
-git clone 你的仓库HTTPS地址
+git clone https://github.com/anqing-myh/lastdawn.git
 cd lastdawn
-npm install
+npm ci
+npm run check
 npm run build
 npm start
 ```
 
-打开 `http://localhost:3000`。依赖和构建产物由命令生成，不需要上传。三个scripts文件是服务启动必需文件，不能因为其他测试脚本被排除而一起删除。
+打开 http://localhost:3000 。运行时通过加载器读取 TypeScript，安装依赖时需要保留 devDependencies。公开仓库未包含本地测试和辅助脚本，运行游戏使用 `dev`、`build`、`start`、`check` 命令。
 
-## 四、后续更新
+## 仓库与部署
 
-此目录是本次的公开快照，后续游戏修改不会自动同步。更新已公开的对应源码、数据、WebP图片和角色文档后，在此目录执行：
+保留当前项目根目录的 `.git`，其中保存提交历史和远程设置。测试、草稿和原始素材按本地开发用途保留。
 
-```powershell
-git status --short
-git add .
-git commit -m 'Update game content'
-git push
-```
-
-不要覆盖或删除已经初始化的 `.git`。完整开发目录中的测试、草稿及原始素材继续留作本地开发使用。
+提交GitHub与部署服务器是独立操作。公网部署等待作者另行明确安排。

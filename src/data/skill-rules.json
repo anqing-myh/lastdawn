@@ -22,7 +22,8 @@
     "round_history_limit": 100,
     "maxBattleRounds": 300,
     "talentLifeOrbCost": 0.1,
-    "talentLifeOrbMultiplier": 1.4,
+    "talentLifeOrbMultiplier": 1.2,
+    "weaponLimit": 6,
     "talentFairyHeal": 0.08,
     "talentPrimalThreshold": 80,
     "talentElementAbsorbPoints": 30,
@@ -111,7 +112,10 @@
       "target": "self",
       "status": "holy_blessing",
       "value": 180,
-      "triggerStage": { "sp_atk": 1, "spd": 1 }
+      "triggerStage": {
+        "sp_atk": 1,
+        "spd": 1
+      }
     },
     "sacred_kirin_3": {
       "stageEnemy": {
@@ -220,7 +224,7 @@
     },
     "xuanwu_4": {
       "enemyStatus": "slow",
-      "value": 0.4,
+      "value": 0.3,
       "duration": 3
     },
     "xuanwu_5": {
@@ -304,7 +308,7 @@
     "wood_spirit_6": {
       "fearChance": 0.5,
       "failureDamageBonus": 0.8,
-      "duration": 1
+      "duration": 2
     },
     "summoner_1": {
       "mechanic": "summon_element",
@@ -377,7 +381,7 @@
         "dfs": -1,
         "sp_dfs": -1
       },
-      "paralyzeChance": 0.5
+      "stunChance": 0.5
     },
     "thunder_dragon_6": {
       "channel": "mixed",
@@ -607,7 +611,7 @@
     },
     "shark_king_5": {
       "target": "single",
-      "status": "shark_blade",
+      "mechanic": "shark_blade",
       "duration": 3,
       "value": 50
     },
@@ -631,7 +635,7 @@
     "titan_3": {
       "mechanic": "attack_fixed",
       "costStage": 1,
-      "ratio": 0.3
+      "ratio": 0.5
     },
     "titan_4": {
       "stageEnemy": {
@@ -647,7 +651,7 @@
     "titan_6": {
       "selfDamage": 0.25,
       "enemyStatus": "fear",
-      "duration": 1
+      "duration": 2
     },
     "wuchang_1": {
       "target": "self",
@@ -681,12 +685,12 @@
     "leviathan_1": {
       "mechanic": "ancient_blood",
       "cost": 70,
-      "value": 20
+      "value": 30
     },
     "leviathan_2": {
       "mechanic": "aoe_guard",
       "threshold": 120,
-      "value": 1
+      "reduction": 0.5
     },
     "leviathan_3": {
       "mechanic": "wind_target_lock"
@@ -694,7 +698,8 @@
     "leviathan_4": {
       "target": "any",
       "status": "tornado_target",
-      "duration": 1
+      "duration": 1,
+      "noConsecutiveRounds": true
     },
     "leviathan_5": {
       "fastestMultiplier": 2
@@ -905,7 +910,7 @@
     },
     "alba_1": {
       "mechanic": "rose_seal",
-      "duration": 2,
+      "duration": 1,
       "everyRounds": 3,
       "extra": 1
     },
@@ -1009,35 +1014,192 @@
       "powerBase": 350,
       "lifesteal": 0.6
     },
-    "ice_core_1": { "mechanic": "ice_core_passive" },
-    "ice_core_2": { "target": "self", "mechanic": "ice_core_mode" },
-    "ice_core_3": { "target": "single", "mechanic": "ice_add", "layers": 2, "channel": "physical" },
-    "ice_core_4": { "target": "all_enemies", "mechanic": "ice_age", "channel": "spell" },
-    "ice_core_5": { "mechanic": "ice_rain", "channel": "physical" },
-    "ice_core_6": { "target": "all_enemies", "mechanic": "ice_storm", "extraLayerOnAttack": true },
-    "hell_core_1": { "target": "self", "mechanic": "hell_energy", "duration": 1, "reduction": 0.2, "teamFireBonus": 0.1, "repeatCost": 100 },
-    "hell_core_2": { "stageEnemyIfDamageOver": 100, "stageEnemy": { "dfs": -1, "sp_dfs": -1 } },
-    "hell_core_3": { "target": "all_enemies", "selfStatus": "hell_stun", "duration": 2, "statusStartsNextRound": true },
-    "hell_core_4": { "target": "self", "mechanic": "hell_guidance", "duration": 2 },
-    "hell_core_5": { "mechanic": "hell_ray", "powerRoundMultiplier": 20, "extraFireHit": true, "duration": 3 },
-    "hell_core_6": { "mechanic": "hell_explosion", "bonusMultiplier": 1.4 },
-    "sword_dance_1": { "target": "self", "mechanic": "weapon_choose", "weapons": ["moon_blade", "flying_axe"] },
-    "sword_dance_2": { "target": "self", "mechanic": "weapon_choose", "weapons": ["absorb_shield", "black_shield"] },
-    "sword_dance_3": { "target": "self", "mechanic": "weapon_choose", "weapons": ["eternal_spear", "victory_sword"] },
-    "sword_dance_4": { "target": "self", "mechanic": "weapon_reforge" },
-    "sword_dance_5": { "powerCounter": "weapon_count", "powerPerCounter": 40 },
-    "sword_dance_6": { "target": "ally", "mechanic": "weapon_sacrifice" },
-    "calamity_core_1": { "mechanic": "calamity_passive", "chance": 0.5 },
-    "calamity_core_2": { "mechanic": "calamity_mark", "target": "single", "immuneControl": true },
-    "calamity_core_3": { "mechanic": "calamity_prophecy", "target": "self", "duration": 2, "chance": 0.33, "deathStatRatio": 0.15 },
-    "calamity_core_4": { "mechanic": "calamity_cap", "cap": 100, "duration": 1 },
-    "calamity_core_5": { "target": "all_enemies", "mechanic": "calamity_immunity", "duration": 1 },
-    "calamity_core_6": { "target": "ally_or_self", "mechanic": "calamity_pact" },
-    "death_reaper_1": { "mechanic": "death_reaper_passive", "ghostHp": 100, "cooldown": 2 },
-    "death_reaper_2": { "target": "single", "mechanic": "death_slash" },
-    "death_reaper_3": { "target": "single", "mechanic": "death_gaze", "thresholds": [200, 400, 600], "stages": [1, 2, 3], "ghostThresholds": [0, 300, 600] },
-    "death_reaper_4": { "target": "single", "timing": "first", "mechanic": "death_fake_death", "tries": 4, "chances": [0.2, 0.4, 0.6, 0.8], "ghostEnergy": 100, "duration": 4 },
-    "death_reaper_5": { "target": "single", "timing": "last", "mechanic": "death_despair", "duration": 3, "damagePerEnergy": 0.01, "damageCap": 5, "ghostChargeBreakChance": 0.6 },
-    "death_reaper_6": { "mechanic": "death_scythe", "channel": "spell", "power": 30, "ghostEnergyRatio": 0.1, "ghostLifesteal": 1 }
+    "ice_core_1": {
+      "mechanic": "ice_core_passive"
+    },
+    "ice_core_2": {
+      "target": "self",
+      "mechanic": "ice_core_mode"
+    },
+    "ice_core_3": {
+      "target": "single",
+      "mechanic": "ice_add",
+      "layers": 2,
+      "channel": "physical"
+    },
+    "ice_core_4": {
+      "target": "all_enemies",
+      "mechanic": "ice_age",
+      "channel": "spell"
+    },
+    "ice_core_5": {
+      "mechanic": "ice_rain",
+      "channel": "physical"
+    },
+    "ice_core_6": {
+      "target": "all_enemies",
+      "mechanic": "ice_storm",
+      "extraLayerOnAttack": true
+    },
+    "hell_core_1": {
+      "target": "self",
+      "mechanic": "hell_energy",
+      "duration": 1,
+      "reduction": 0.2,
+      "teamFireBonus": 0.1,
+      "repeatCost": 100
+    },
+    "hell_core_2": {
+      "stageEnemyIfDamageOver": 100,
+      "stageEnemy": {
+        "dfs": -1,
+        "sp_dfs": -1
+      }
+    },
+    "hell_core_3": {
+      "target": "all_enemies",
+      "selfStatus": "hell_stun",
+      "duration": 2,
+      "statusStartsNextRound": true
+    },
+    "hell_core_4": {
+      "target": "self",
+      "mechanic": "hell_guidance",
+      "duration": 2
+    },
+    "hell_core_5": {
+      "mechanic": "hell_ray",
+      "powerRoundMultiplier": 20,
+      "extraFireHit": true,
+      "duration": 3
+    },
+    "hell_core_6": {
+      "mechanic": "hell_explosion",
+      "bonusMultiplier": 1.4
+    },
+    "sword_dance_1": {
+      "target": "self",
+      "mechanic": "weapon_choose",
+      "weapons": [
+        "moon_blade",
+        "flying_axe"
+      ]
+    },
+    "sword_dance_2": {
+      "target": "self",
+      "mechanic": "weapon_choose",
+      "weapons": [
+        "absorb_shield",
+        "black_shield"
+      ]
+    },
+    "sword_dance_3": {
+      "target": "self",
+      "mechanic": "weapon_choose",
+      "weapons": [
+        "eternal_spear",
+        "victory_sword"
+      ]
+    },
+    "sword_dance_4": {
+      "target": "self",
+      "mechanic": "weapon_reforge"
+    },
+    "sword_dance_5": {
+      "powerCounter": "weapon_count",
+      "powerPerCounter": 40
+    },
+    "sword_dance_6": {
+      "target": "ally",
+      "mechanic": "weapon_sacrifice"
+    },
+    "calamity_core_1": {
+      "mechanic": "calamity_passive",
+      "chance": 0.5
+    },
+    "calamity_core_2": {
+      "mechanic": "calamity_mark",
+      "target": "single",
+      "immuneControl": true
+    },
+    "calamity_core_3": {
+      "mechanic": "calamity_prophecy",
+      "target": "self",
+      "duration": 2,
+      "chance": 0.33,
+      "deathStatRatio": 0.15
+    },
+    "calamity_core_4": {
+      "mechanic": "calamity_cap",
+      "cap": 100,
+      "duration": 1
+    },
+    "calamity_core_5": {
+      "target": "all_enemies",
+      "mechanic": "calamity_immunity",
+      "duration": 1
+    },
+    "calamity_core_6": {
+      "target": "ally_or_self",
+      "mechanic": "calamity_pact"
+    },
+    "death_reaper_1": {
+      "mechanic": "death_reaper_passive",
+      "ghostHp": 100,
+      "cooldown": 2
+    },
+    "death_reaper_2": {
+      "target": "single",
+      "mechanic": "death_slash"
+    },
+    "death_reaper_3": {
+      "target": "single",
+      "mechanic": "death_gaze",
+      "thresholds": [
+        200,
+        400,
+        600
+      ],
+      "stages": [
+        1,
+        2,
+        3
+      ],
+      "ghostThresholds": [
+        0,
+        300,
+        600
+      ]
+    },
+    "death_reaper_4": {
+      "target": "single",
+      "timing": "first",
+      "mechanic": "death_fake_death",
+      "tries": 4,
+      "chances": [
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "ghostEnergy": 100,
+      "duration": 4
+    },
+    "death_reaper_5": {
+      "target": "single",
+      "timing": "last",
+      "mechanic": "death_despair",
+      "duration": 3,
+      "damagePerEnergy": 0.01,
+      "damageCap": 5,
+      "ghostChargeBreakChance": 0.6
+    },
+    "death_reaper_6": {
+      "mechanic": "death_scythe",
+      "channel": "spell",
+      "power": 30,
+      "ghostEnergyRatio": 0.1,
+      "ghostLifesteal": 1
+    }
   }
 }

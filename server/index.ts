@@ -5,12 +5,14 @@ import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
 import {WebSocketServer,WebSocket} from 'ws';
 import {RoomService,RoomError} from './rooms';
+import {BotWorker,ComputerService} from './bots';
 import type {Action,Loadout,ServerMessage} from '../src/shared/types';
 const production=process.argv.includes('--production');
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const port=Number(process.env.PORT??3000),host=process.env.HOST??'0.0.0.0';
 const timerEnv=process.env.TURN_TIMER_ENABLED;
 const rooms=new RoomService(undefined,undefined,{turnTimerEnabled:timerEnv===undefined?undefined:timerEnv==='true'});
+const botWorker=new BotWorker(),computers=new ComputerService(rooms,botWorker.decide);
 type Session={token:string;id:string;name:string;ws:WebSocket|null;lastSeen:number;requests:number;window:number;alive:boolean};
 const sessions=new Map<string,Session>();
 const server=http.createServer();
@@ -49,6 +51,7 @@ wss.on('connection',ws=>{
   switch(m.type){
    case 'list':lobby();return;
    case 'create':if(typeof m.name!=='string')throw Error('房间名称无效');changed=rooms.create(session.id,session.name,m.name,m.mode==='duel'?'duel':'quick').id;break;
+   case 'create-bot':changed=rooms.createBot(session.id,session.name).id;break;
    case 'join':if(typeof m.roomId!=='string')throw Error('房间号无效');changed=rooms.join(m.roomId.toUpperCase(),session.id,session.name).id;break;
    case 'leave':if(r){rooms.leave(r.id,session.id);send(ws,{type:'left'});}break;
    case 'ready':if(!r)throw Error('请先加入房间');rooms.ready(r.id,session.id,Boolean(m.ready));break;
@@ -69,10 +72,10 @@ wss.on('connection',ws=>{
  ws.on('error',()=>{});
  ws.on('close',()=>{clearTimeout(helloTimer);if(session&&session.ws===ws){session.ws=null;session.lastSeen=Date.now();const r=rooms.connect(session.id,false);if(r)room(r.id);lobby();}});
 });
-const tick=setInterval(()=>{try{const changed=rooms.tick();for(const id of changed){room(id);for(const playerId of rooms.consumeClosed(id)){const s=[...sessions.values()].find(s=>s.id===playerId);if(s)send(s.ws,{type:'room-closed',roomId:id});}}if(changed.length)lobby();}catch(e){console.error('room tick failed',e);}},250);
+const tick=setInterval(()=>{try{const changed=[...new Set([...rooms.tick(),...computers.tick()])];for(const id of changed){room(id);for(const playerId of rooms.consumeClosed(id)){const s=[...sessions.values()].find(s=>s.id===playerId);if(s)send(s.ws,{type:'room-closed',roomId:id});}}if(changed.length)lobby();}catch(e){console.error('room tick failed',e);}},250);
 const heartbeat=setInterval(()=>{for(const [token,s] of sessions){if(s.ws){if(!s.alive){s.ws.terminate();continue;}s.alive=false;s.ws.ping();}else if(Date.now()-s.lastSeen>3_600_000&&!rooms.findPlayer(s.id))sessions.delete(token);}},15000);
 server.listen(port,host,()=>console.log('末日黎明 server http://localhost:'+port+' ('+(production?'production':'development')+')'));
-function shutdown(){clearInterval(tick);clearInterval(heartbeat);for(const ws of wss.clients)ws.close(1001,'server shutdown');server.close(()=>process.exit(0));setTimeout(()=>process.exit(0),2000).unref();}
+function shutdown(){computers.close();botWorker.close();clearInterval(tick);clearInterval(heartbeat);for(const ws of wss.clients)ws.close(1001,'server shutdown');server.close(()=>process.exit(0));setTimeout(()=>process.exit(0),2000).unref();}
 process.on('SIGINT',shutdown);process.on('SIGTERM',shutdown);
 
 
