@@ -47,3 +47,7 @@
 .computer-arena .hero-copy { max-width: 760px; padding-right: 24px; }
 
 .profile{width:100%;border:1px solid transparent;background:transparent;color:inherit;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}.profile:hover:not(:disabled){background:#b8c3a50d;border-color:#d0b77b1b}.profile:disabled{cursor:default}.profile-copy{min-width:0;text-align:left}.profile-copy strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.site-footer{flex-wrap:wrap;align-items:center;gap:12px 20px}
+.site-footer>a{color:#a8b4ad;font-size:12px;letter-spacing:0;text-decoration:underline;text-underline-offset:3px}
+.site-footer>a:hover,.site-footer>a:focus-visible{color:var(--gold,#e3c890)}
