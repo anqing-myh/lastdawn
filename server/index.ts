@@ -21,10 +21,11 @@ else server.on('request',(req,res)=>{
  if(req.url==='/health'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ok:true,rooms:rooms.rooms.size}));return;}
  let decoded:string;try{decoded=decodeURIComponent((req.url??'/').split('?')[0]);}catch{res.writeHead(400);res.end();return;}
  const base=path.join(root,'dist'),requested=path.resolve(base,'.'+decoded);if(requested!==base&&!requested.startsWith(base+path.sep)){res.writeHead(403);res.end();return;}
- const file=fs.existsSync(requested)&&fs.statSync(requested).isFile()?requested:path.join(base,'index.html');
+ const isFile=fs.existsSync(requested)&&fs.statSync(requested).isFile();const file=isFile?requested:path.join(base,'index.html');
  if(!fs.existsSync(file)){res.writeHead(503);res.end('Run npm run build first');return;}
  const mime:Record<string,string>={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.ico':'image/x-icon'};
- res.writeHead(200,{'Content-Type':mime[path.extname(file)]??'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':file.endsWith('index.html')?'no-cache':'public, max-age=3600'});fs.createReadStream(file).pipe(res);
+ const cacheControl=file.endsWith('index.html')?'no-cache':isFile&&decoded.startsWith('/assets/')?'public, max-age=31536000, immutable':'public, max-age=3600';
+ res.writeHead(200,{'Content-Type':mime[path.extname(file)]??'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':cacheControl});fs.createReadStream(file).pipe(res);
 });
 const wss=new WebSocketServer({noServer:true,maxPayload:32768});
 server.on('upgrade',(req,socket,head)=>{if(req.url!=='/ws'){socket.destroy();return;}const origin=req.headers.origin;if(origin){try{const url=new URL(origin);if(url.host!==req.headers.host){socket.destroy();return;}}catch{socket.destroy();return;}}wss.handleUpgrade(req,socket,head,ws=>wss.emit('connection',ws,req));});
@@ -50,6 +51,14 @@ wss.on('connection',ws=>{
   const r=rooms.findPlayer(session.id);let changed=r?.id;
   switch(m.type){
    case 'list':lobby();return;
+   case 'rename':{
+    if(typeof m.name!=='string')throw new RoomError('invalid_name','昵称格式无效');
+    const name=m.name.trim();
+    if(!name||name.length>16||/[\u0000-\u001f\u007f]/.test(name))throw new RoomError('invalid_name','昵称需为1至16个字符');
+    session.name=name;changed=rooms.rename(session.id,name)?.id;
+    send(ws,{type:'session',token:session.token,playerId:session.id,name:session.name});
+    break;
+   }
    case 'create':if(typeof m.name!=='string')throw Error('房间名称无效');changed=rooms.create(session.id,session.name,m.name,m.mode==='duel'?'duel':'quick').id;break;
    case 'create-bot':changed=rooms.createBot(session.id,session.name).id;break;
    case 'join':if(typeof m.roomId!=='string')throw Error('房间号无效');changed=rooms.join(m.roomId.toUpperCase(),session.id,session.name).id;break;

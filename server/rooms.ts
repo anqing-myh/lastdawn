@@ -21,6 +21,14 @@ export class RoomService {
   private membership(id: string, pid: string) { const room = this.get(id), side = room.players.findIndex(p => p.id === pid); if (side < 0) this.fail('not_member', 'You are not in this room'); return { r: room, side: side as Side }; }
   private deadline(room: Room, seconds: number) { room.phaseStarted = this.clock(); room.deadline = room.phaseStarted + seconds * 1000; room.updatedAt = this.clock(); }
   findPlayer(pid: string) { return [...this.rooms.values()].find(r => r.players.some(p => p.id === pid)); }
+  rename(pid: string, name: string) {
+    const room = this.findPlayer(pid);
+    if (!room) return;
+    const player = room.players.find(p => p.id === pid)!;
+    player.name = name;
+    room.updatedAt = this.clock();
+    return room;
+  }
   list(): LobbyRoom[] { return [...this.rooms.values()].filter(r => r.botSide === undefined).map(r => ({ id: r.id, name: r.name, mode: r.mode, players: r.players.length, phase: r.phase, host: r.players[0]?.name ?? 'Guest' })); }
   // The network layer supplies the selected mode explicitly. Duel remains the API default for older direct callers.
   create(pid: string, name: string, roomName: string, mode: GameMode = 'duel') {
@@ -33,9 +41,9 @@ export class RoomService {
     this.rooms.set(id, room); return room;
   }
   createBot(pid: string, name: string) {
-    const room = this.create(pid, name, '贪心人机训练', 'quick');
+    const room = this.create(pid, name, '玄灵之影（人机）训练', 'quick');
     room.botSide = 1;
-    room.players.push(this.player('bot:' + randomBytes(12).toString('hex'), '贪心人机'));
+    room.players.push(this.player('bot:' + randomBytes(12).toString('hex'), '玄灵之影（人机）'));
     room.players[1].ready = true;
     return room;
   }
